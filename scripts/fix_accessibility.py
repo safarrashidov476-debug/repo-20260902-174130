@@ -450,7 +450,7 @@ FIXES.append({
                                 tiflogramPercent = Math.round(Math.max(0f, Math.min(1f,
                                         (float) currentMessageObject.loadedFileSize / (float) lastLoadingSizeTotal)) * 100);
                             }
-                            sb.append(tiflogramPercent).append(" foiz");
+                            sb.append(String.valueOf(tiflogramPercent)).append(" foiz");
                             sb.append("\\n");
                         }
                     }''',

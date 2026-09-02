@@ -19,6 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GeminiSafetyScanner {
@@ -441,9 +442,11 @@ public class GeminiSafetyScanner {
         edit.setMinLines(1);
         edit.setMaxLines(4);
         edit.setPadding(AndroidUtilities.dp(8), AndroidUtilities.dp(8), AndroidUtilities.dp(8), AndroidUtilities.dp(8));
-        box.addView(edit, new android.widget.LinearLayout.LayoutParams(
+        android.widget.LinearLayout.LayoutParams editLp = new android.widget.LinearLayout.LayoutParams(
                 android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
-                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 0, AndroidUtilities.dp(8), 0, 0));
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
+        editLp.topMargin = AndroidUtilities.dp(8);
+        box.addView(edit, editLp);
 
         org.telegram.ui.ActionBar.AlertDialog.Builder b = new org.telegram.ui.ActionBar.AlertDialog.Builder(act);
         b.setTitle("Gemini");
@@ -454,8 +457,8 @@ public class GeminiSafetyScanner {
         final org.telegram.ui.ActionBar.AlertDialog dlg = b.create();
 
         dlg.setOnShowListener(d -> {
-            final android.widget.Button askBtn = dlg.getButton(android.content.DialogInterface.BUTTON_POSITIVE);
-            final android.widget.Button keyBtn = dlg.getButton(android.content.DialogInterface.BUTTON_NEUTRAL);
+            final android.view.View askBtn = dlg.getButton(android.content.DialogInterface.BUTTON_POSITIVE);
+            final android.view.View keyBtn = dlg.getButton(android.content.DialogInterface.BUTTON_NEUTRAL);
 
             if (askBtn != null) askBtn.setOnClickListener(v -> {
                 final String q = edit.getText() != null ? edit.getText().toString().trim() : "";
